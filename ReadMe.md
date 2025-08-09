@@ -6,4 +6,4 @@
 
 | Problem | Link |
 |---------|------|
-| Two Sum | [Link](Two_Sum.java) |
+| Two Sum | [Link](Two_Sum) |
