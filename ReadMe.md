@@ -6,4 +6,4 @@
 
 | Problem | Link |
 |---------|------|
-| Two Sum | [Link](Two_Sum) |
+| Two Sum | [Link](https://github.com/Prathameshghod/DSA/tree/main/Two%20Sum) |
