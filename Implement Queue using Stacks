@@ -1,0 +1,54 @@
+class MyQueue {
+    int top;
+    int end;
+    int[] a;
+    int size;
+    int n;
+    public MyQueue() {
+        n=1000;
+        a= new int[n];
+        top=0;
+        end=-1;
+        size=0;
+    }
+    
+    public void push(int x) {
+        if(n==size){
+            return;
+        }
+        
+        end=(end+1)%n;
+        a[end]=x;
+        size++;
+    }
+    
+    public int pop() {
+        if(size==0){
+            return -1;
+        }
+        int val=a[top];
+        top=(top+1)%n;
+        size--;
+        return val;
+    }
+    
+    public int peek() {
+        if(n==0){
+            return -1;
+        }
+        return a[top];
+    }
+    
+    public boolean empty() {
+        return size==0;
+    }
+}
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue obj = new MyQueue();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.peek();
+ * boolean param_4 = obj.empty();
+ */
