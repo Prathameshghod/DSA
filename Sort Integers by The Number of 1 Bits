@@ -1,0 +1,30 @@
+class Solution {
+    // public int count_bits(int n){
+    //     int c=0;
+    //     while(n>0){
+    //         if(n%2==1){
+    //             c++;
+    //         }
+    //         n=n/2;
+    //     }
+    //     return c;
+    // }
+    public int[] sortByBits(int[] arr) {
+        List<Integer>[] a=new ArrayList[33];
+        for(int i=0;i<33;i++){
+            a[i]=new ArrayList<>();
+        }
+        for(int i:arr){
+            int cb=Integer.bitCount(i);
+            a[cb].add(i);
+        }
+        int idx=0;
+        for(int i=0;i<33;i++){
+            Collections.sort(a[i]);
+            for(int j:a[i]){
+                arr[idx++]=j;
+            }
+        }
+        return arr;
+    }
+}
