@@ -1,0 +1,48 @@
+class MyStack {
+    int n;
+    int top;
+    int[] a;
+    public MyStack() {
+        n=1000;
+        top=-1;
+        a=new int[n];
+    }
+    
+    public void push(int x) {
+            if (top==n-1){
+                return;
+            }
+            top++;
+            a[top]=x;
+    }
+    
+    public int pop() {
+        if(empty()){
+            return -1;
+        }
+    
+        int val=a[top];
+        top--;
+        return val;
+    }
+    
+    public int top() {
+        if(empty()){
+            return -1;
+        }
+        return a[top];
+    }
+    
+    public boolean empty() {
+        return top==-1;
+    }
+}
+
+/**
+ * Your MyStack object will be instantiated and called as such:
+ * MyStack obj = new MyStack();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.top();
+ * boolean param_4 = obj.empty();
+ */
