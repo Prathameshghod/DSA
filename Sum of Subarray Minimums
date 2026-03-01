@@ -1,0 +1,47 @@
+class Solution {
+    public int[] findnse(int[] a){
+        int n=a.length;
+        int[] b= new int[n];
+        Deque<Integer> s= new ArrayDeque<>();
+        for(int i=n-1;i>=0;i--){
+            while(!s.isEmpty() && a[s.peek()]>a[i]){
+                s.pop();
+            }
+            b[i]=!s.isEmpty()?s.peek():n;
+            s.push(i);
+        }
+        return b;
+    }
+
+    public int[] findpse(int[] a){
+        int n=a.length;
+        int[] b= new int[n];
+        Deque<Integer> s= new ArrayDeque<>();
+        for(int i=0;i<n;i++){
+            while(!s.isEmpty() && a[s.peek()]>=a[i]){
+                s.pop();
+            }
+            b[i]=!s.isEmpty()?s.peek():-1;
+            s.push(i);
+        }
+        return b;
+    }
+
+    public int sumSubarrayMins(int[] arr) {
+        int n=arr.length;
+        int[] nse=findnse(arr);
+        int[] pse=findpse(arr);
+        int mod = (int)1e9 + 7;
+        int s=0;
+        for(int i=0;i<n;i++){
+            int a=i-pse[i];
+            int b=nse[i]-i;
+
+            long f=a*b;
+
+            int r=(int)((f*arr[i])%mod);
+            s=(s+r)%mod;
+        }
+        return s;
+    }
+}
