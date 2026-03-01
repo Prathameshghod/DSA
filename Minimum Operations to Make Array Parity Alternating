@@ -1,0 +1,64 @@
+class Solution {
+    public int[] makeParityAlternating(int[] nums) {
+        int n=nums.length;
+        int opa=0;
+        int opb=0;
+        for(int i=0;i<n;i++){
+            int p=Math.abs(nums[i]) % 2;
+            if(p != i%2){
+                opa++;
+            }
+            else{
+                opb++;
+            }
+        }
+        int minop=Math.min(opa,opb);
+        int minrange=Integer.MAX_VALUE;
+
+        if(opa==minop){
+            minrange=Math.min(minrange,solve(nums,0));
+        }
+        if(opb==minop){
+            minrange=Math.min(minrange,solve(nums,1));
+        }
+        return new int[]{minop,minrange};
+    }
+    private int solve(int[] nums,int sta){
+        int n=nums.length;
+        List<int[]> arr= new ArrayList<>();
+        for(int i=0;i<n;i++){
+            int r=(sta+i)%2;
+            if(Math.abs(nums[i]) % 2 == r){
+                arr.add(new int[]{nums[i],i});
+            }
+            else{
+                 arr.add(new int[]{nums[i]-1,i});
+                 arr.add(new int[]{nums[i]+1,i});
+            }
+        }
+        arr.sort(Comparator.comparingInt(a -> a[0]));
+
+        int[] f=new int[n];
+        int u=0;
+        int l=0;
+        int re=Integer.MAX_VALUE;
+
+        for(int ri=0;ri<arr.size();ri++){
+            int idx=arr.get(ri)[1];
+            if(f[idx]++ == 0){
+                u++;
+            }
+            while(u==n){
+                re=Math.min(re,arr.get(ri)[0] - arr.get(l)[0]);
+                int li=arr.get(l)[1];
+                if(--f[li]==0){
+                    u--;
+                    
+                }
+                l++;
+            }
+        }
+            return re;
+        }
+    }
+
