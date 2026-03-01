@@ -1,0 +1,97 @@
+class Solution {
+    
+    public int[] findnge(int[] nums){
+        int n=nums.length;
+        Deque<Integer> s= new ArrayDeque<>();
+        int[] b= new int[n];
+        for(int i=n-1;i>=0;i--){
+            while(!s.isEmpty() && nums[s.peek()]<=nums[i]){
+                s.pop();
+            }
+            b[i]= !s.isEmpty()?s.peek():n;
+            s.push(i);
+        }
+        return b;
+    }
+
+    public int[] findpge(int[] nums){
+         int n=nums.length;
+        Deque<Integer> s= new ArrayDeque<>();
+        int[] b= new int[n];
+        for(int i=0;i<n;i++){
+            while(!s.isEmpty() && nums[s.peek()]<nums[i]){
+                s.pop();
+            }
+            b[i]= !s.isEmpty()?s.peek():-1;
+            s.push(i);
+        }
+        return b;
+    }
+    
+    public long maxsum(int[] nums){
+         int n=nums.length;
+        int[] nge=findnge(nums);
+        int[] pge=findpge(nums);
+        long s=0;
+        for(int i=0;i<n;i++){
+            long a=i-pge[i];
+            long b=nge[i]-i;
+
+            
+            s+=(a*b*nums[i]);
+
+        }
+        return s;
+    }
+
+
+    public int[] findnse(int[] nums){
+        int n=nums.length;
+        Deque<Integer> s= new ArrayDeque<>();
+        int[] b= new int[n];
+        for(int i=n-1;i>=0;i--){
+            while(!s.isEmpty() && nums[s.peek()]>=nums[i]){
+                s.pop();
+            }
+            b[i]= !s.isEmpty()?s.peek():n;
+            s.push(i);
+        }
+        return b;
+    }
+
+    public int[] findpse(int[] nums){
+         int n=nums.length;
+        Deque<Integer> s= new ArrayDeque<>();
+        int[] b= new int[n];
+        for(int i=0;i<n;i++){
+            while(!s.isEmpty() && nums[s.peek()]>nums[i]){
+                s.pop();
+            }
+            b[i]= !s.isEmpty()?s.peek():-1;
+            s.push(i);
+        }
+        return b;
+    }
+
+    public long minsum(int[] nums){
+        int n=nums.length;
+        int[] nse=findnse(nums);
+        int[] pse=findpse(nums);
+        long s=0;
+        for(int i=0;i<n;i++){
+            long a=i-pse[i];
+            long b=nse[i]-i;
+
+             s+=(a*b*nums[i]);
+
+        }
+        return s;
+
+    }
+
+    public long subArrayRanges(int[] nums) {
+        long max=maxsum(nums);
+        long min=minsum(nums);
+        return max - min;
+    }
+}
