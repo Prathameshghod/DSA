@@ -1,0 +1,28 @@
+class Solution {
+    public int minimumOR(int[][] grid) {
+        int[][] t=grid;
+        int a=(1<<17)-1;
+        for(int b=16;b>=0;b--){
+            int c=a & (~(1<<b));
+            if(can(t,c)){
+                a=c;
+            }
+        }
+        return a;
+    }
+    private boolean can(int[][] t,int m){
+        for(int[] r:t){
+            boolean o=false;
+            for(int x:r){
+                if((x | m) ==m){
+                    o=true;
+                    break;
+                }
+            }
+            if(!o){
+                return false;
+            }
+        }
+        return true;
+    }
+}
