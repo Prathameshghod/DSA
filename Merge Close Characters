@@ -1,0 +1,20 @@
+class Solution {
+    public String mergeCharacters(String s, int k) {
+        boolean r=true;
+        while(r){
+            r=false;
+            int l=s.length();
+            for(int i=0;i<l;i++){
+                for(int j=i+1;j<=i+k && j<l;j++){
+                    if(s.charAt(i)==s.charAt(j)){
+                        s=s.substring(0,j)+s.substring(j+1);
+                        r=true;
+                        break;
+                    }
+                }
+                if(r) break;
+            }
+        }
+        return s;
+    }
+}
