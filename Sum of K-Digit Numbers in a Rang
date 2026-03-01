@@ -1,0 +1,30 @@
+class Solution {
+    static final long mod=1000000007;
+    public int sumOfNumbers(int l, int r, int k) {
+        long m=r-l+1;
+        long d=((long)(l+r)*m/2)%mod;
+        long pm =power(m,k-1);
+        long p10=power(10,k);
+
+        long s10=(p10-1+mod)%mod;
+
+        s10=(s10 * 111111112L)%mod;
+        long ans=(d*pm)%mod;
+        return (int)((ans * s10) %mod);
+        
+    }
+    private long power(long base,long exp){
+        long re=1;
+        base%=mod;
+        while(exp>0){
+            if((exp &1)==1)
+                re=(re * base) %mod;
+                
+            base=(base*base) % mod;
+            exp >>=1;
+            
+            
+        }
+        return re;
+    }
+}
