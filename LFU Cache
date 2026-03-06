@@ -1,0 +1,121 @@
+import java.util.HashMap;
+import java.util.Map;
+
+class Node{
+    int key,value,cnt;
+    Node prev,next;
+
+    Node(int key,int value){
+        this.key=key;
+        this.value=value;
+        cnt=1;
+    }
+}
+
+class DLL{
+    int size;
+    Node head,tail;
+
+    DLL(){
+        head=new Node(0,0);
+        tail=new Node(0,0);
+        head.next=tail;
+        tail.prev=head;
+        size=0;
+    }
+
+    void addFrontNode(Node a){
+        Node temp=head.next;
+        a.next=temp;
+        a.prev=head;
+        head.next=a;
+        temp.prev=a;
+        size++;
+    }
+
+    void delNode(Node a){
+        a.prev.next=a.next;
+        a.next.prev=a.prev;
+        size--;
+    }
+}
+
+class LFUCache {
+
+    Map<Integer,Node> keymap;
+    Map<Integer,DLL> freqmap;
+
+    int cap,minfreq,currsize;
+
+    public LFUCache(int capacity) {
+        keymap=new HashMap<>();
+        freqmap=new HashMap<>();
+        cap=capacity;
+        minfreq=0;
+        currsize=0;
+    }
+
+    private void update_freqmap(Node a){
+
+        int oldFreq = a.cnt;
+
+        DLL oldList = freqmap.get(oldFreq);
+        oldList.delNode(a);
+
+        if(oldFreq==minfreq && oldList.size==0){
+            minfreq++;
+        }
+
+        a.cnt++;
+
+        DLL newList = freqmap.getOrDefault(a.cnt,new DLL());
+        newList.addFrontNode(a);
+
+        freqmap.put(a.cnt,newList);
+    }
+    
+    public int get(int key) {
+
+        if(!keymap.containsKey(key))
+            return -1;
+
+        Node a=keymap.get(key);
+        int val=a.value;
+
+        update_freqmap(a);
+        return val;
+    }
+    
+    public void put(int key, int value) {
+
+        if(cap==0) return;
+
+        if(keymap.containsKey(key)){
+            Node a=keymap.get(key);
+            a.value=value;
+            update_freqmap(a);
+        }
+        else{
+
+            if(currsize==cap){
+
+                DLL l=freqmap.get(minfreq);
+                Node nodeToRemove=l.tail.prev;
+
+                l.delNode(nodeToRemove);
+                keymap.remove(nodeToRemove.key);
+                currsize--;
+            }
+
+            Node a=new Node(key,value);
+            minfreq=1;
+
+            DLL l=freqmap.getOrDefault(minfreq,new DLL());
+            l.addFrontNode(a);
+
+            freqmap.put(minfreq,l);
+            keymap.put(key,a);
+            currsize++;
+        }
+    }
+}
