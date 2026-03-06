@@ -1,0 +1,25 @@
+class Solution {
+    public int help(char[] a){
+        int n=a.length;
+        int c=0;
+        for(int i=1;i<n;i++){
+            if(a[i]!=a[i-1]){
+                continue;
+            }
+            else{
+                a[i]=a[i-1]=='0' ? '1':'0';
+                c++;
+            }
+        }
+        return c;
+    }
+    public int minOperations(String s) {
+        int n=s.length();
+        char[] a= s.toCharArray();
+        int d=help(a);
+        char[] b=s.toCharArray();
+        b[0]=b[0]=='1'?'0':'1';
+        int c=help(b)+1;
+        return Math.min(c,d);
+    }
+}
