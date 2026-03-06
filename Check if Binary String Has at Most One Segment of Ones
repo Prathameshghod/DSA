@@ -1,0 +1,16 @@
+class Solution {
+    public boolean checkOnesSegment(String s) {
+        int n=s.length();
+        if(n==1){
+            return s.charAt(0)=='1'? true:false;
+        }
+        for(int i=1;i<n;i++){
+            char c=s.charAt(i);
+            char b=s.charAt(i-1);
+            if(c=='1' && b=='0'){
+                return false;
+            }
+        }
+        return true;
+    }
+}
