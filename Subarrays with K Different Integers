@@ -1,0 +1,27 @@
+class Solution {
+    public int help(int[] nums, int k){
+        int n=nums.length;
+        int m=0;
+        int[] a= new int[n+1]; 
+        int l=0;
+        int c=0;
+        for(int r=0;r<n;r++){
+            a[nums[r]]++;
+            if(a[nums[r]]==1){
+                c++;
+            }
+            while(c>k){
+                a[nums[l]]--;
+                if(a[nums[l]]==0){
+                    c--;
+                }
+                l++;
+            }
+            m+=(r-l+1);
+        }
+        return m;
+    }
+    public int subarraysWithKDistinct(int[] nums, int k) {
+        return help(nums,k)-help(nums,k-1);
+    }
+}
