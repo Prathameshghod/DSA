@@ -1,0 +1,37 @@
+class Solution {
+    public int numberOfSubstrings(String s) {
+        int n=s.length();
+        int d=0;
+        int a=0;
+        int b=0;
+        int c=0;
+        int l=0;
+        for(int r=0;r<n;r++){
+            char e=s.charAt(r);
+            if(e=='a'){
+                a++;
+            }
+            else if(e=='b'){
+                b++;
+            }
+            else{
+               c++;
+            }
+            while(a>0 && b>0 && c>0){
+                char x=s.charAt(l);
+                d+=(n-r);
+                if(x=='a'){
+                    a--;
+                }
+                else if(x=='b'){
+                    b--;
+                }
+                else if(x=='c'){
+                    c--;
+                } 
+                l++;
+            }
+        }
+        return d;
+    }
+}
