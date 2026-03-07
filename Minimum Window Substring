@@ -1,0 +1,47 @@
+class Solution {
+    public String minWindow(String s, String t) {
+
+        int n = s.length();
+        int m = t.length();
+
+        int minlen = Integer.MAX_VALUE;
+        int idx = -1;
+        int c = 0;
+        int[] a = new int[256];
+
+        int r=0;
+        int l=0;
+
+         for(int j = 0; j < m; j++){
+                a[t.charAt(j)]++;
+            }
+        while(r<n){
+
+                if(a[s.charAt(r)] > 0){
+                    c++;
+                }
+                a[s.charAt(r)]--;
+                
+
+
+                while(c == m){
+
+                    if(r - l + 1 < minlen){
+                        minlen = r-l+ 1;
+                        idx = l;
+                    }
+                    a[s.charAt(l)]++;
+                    if(a[s.charAt(l)]>0){
+                        c--;
+                    }
+                    l++;
+                }
+                r++;
+            }
+        
+
+        if(idx == -1) return "";
+
+        return s.substring(idx, idx + minlen);
+    }
+}
