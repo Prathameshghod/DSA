@@ -13,31 +13,28 @@
  *     }
  * }
  */
+
 class Solution {
-     public static void check(TreeNode root, String path, ArrayList<String> r){
-        
-        if(root == null) return;
-        
-        // build path
-        if(path.length() == 0){
-            path = "" + root.val;
-        } else {
-            path = path + "->" + root.val;
-        }
-        
-        // leaf TreeNode
-        if(root.left == null && root.right == null){
-            r.add(path);
+    public void check(TreeNode root,List<String> r,StringBuilder s){
+        if(root==null){
             return;
         }
+        int n=s.length();
+        s.append(root.val);
+        if(root.left==null && root.right==null){
+            r.add(s.toString());
+        }
+        s.append("->");
+        check(root.left,r,s);
+        check(root.right,r,s);
         
-        check(root.left, path, r);
-        check(root.right, path, r);
+        s.setLength(n);
     }
     public List<String> binaryTreePaths(TreeNode root) {
-         ArrayList<String> r = new ArrayList<>();
-        check(root, "", r);
+   
+        List<String> r=new ArrayList<>();
         
+        check(root,r,new StringBuilder());
         return r;
     }
 }
