@@ -14,35 +14,26 @@
  * }
  */
 class Solution {
+    public void right(TreeNode root,int level,List<Integer> r){
+        if(root==null){
+            return;
+        }
+        if(r.size()==level){
+            r.add(root.val);
+        }
+        if(root.right!=null){
+            right(root.right,level+1,r);
+        }
+         if(root.left!=null){
+            right(root.left,level+1,r);
+        }
+
+    }
     public List<Integer> rightSideView(TreeNode root) {
-        List<List<Integer>> a= new ArrayList<>();
-        Queue<TreeNode> q= new LinkedList<>();
 
         List<Integer> r=new ArrayList<>();
-        if(root==null){
-            return r;
-        }
-        q.add(root);
-
-        while(!q.isEmpty()){
-            List<Integer> b=new ArrayList<>();
-            int n=q.size();
-            for(int i=0;i<n;i++){
-                TreeNode c=q.poll();
-                b.add(c.val);
-
-                if(c.left!=null){
-                    q.add(c.left);
-                }
-                if(c.right!=null){
-                    q.add(c.right);
-                }
-            }
-            a.add(b);
-        }
-        for(List<Integer> i:a){
-            r.add(i.get(i.size()-1));
-        }
+        right(root,0,r);
+        
         return r;
     }
 }
