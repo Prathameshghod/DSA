@@ -25,10 +25,11 @@ class Solution {
             int n=q.size();
             int l=0;
             int r=0;
+            int curr=q.peek().getValue();
             for(int i=0;i<n;i++){
                 Pair<TreeNode,Integer> p=q.poll();
                 TreeNode a=p.getKey();
-                Integer b=p.getValue();
+                Integer b=p.getValue()-curr;
                 if(i==0){
                     l=b;
                 }
