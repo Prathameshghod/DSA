@@ -1,32 +1,19 @@
 class Solution {
-    public void check(TreeNode root, List<List<Integer>> r, List<Integer> a) {
-        if (root == null) return;
+    public boolean check(TreeNode root, int t, int c) {
+        if (root == null) return false;
 
-        a.add(root.val);
+        c+=root.val;
 
         if (root.left == null && root.right == null) {
-            r.add(new ArrayList<>(a)); // copy list
+            return c==t;
         }
 
-        check(root.left, r, a);
-        check(root.right, r, a);
+        return check(root.left, t, c) || check(root.right, t, c);
 
-        a.remove(a.size() - 1); // correct backtracking
     }
 
     public boolean hasPathSum(TreeNode root, int targetSum) {
-        List<List<Integer>> r = new ArrayList<>();
-        List<Integer> a = new ArrayList<>();
-
-        check(root, r, a);
-
-        for (List<Integer> i : r) {
-            int c = 0;
-            for (int j : i) {
-                c += j;
-            }
-            if (c == targetSum) return true;
-        }
-        return false;
+       
+        return check(root,targetSum,0);
     }
 }
