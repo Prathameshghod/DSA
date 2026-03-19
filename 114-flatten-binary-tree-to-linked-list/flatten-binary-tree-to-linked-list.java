@@ -14,28 +14,25 @@
  * }
  */
 class Solution {
-    public void check(TreeNode root,LinkedList<Integer> a){
-        if(root==null){
-            return;
-        }
-        a.add(root.val);
-        check(root.left,a);
-        check(root.right,a);
-    }
     public void flatten(TreeNode root) {
-        LinkedList<Integer> a= new LinkedList<>();
-        check(root,a);
-        TreeNode curr=root;
+        Stack<TreeNode> s= new Stack<>();
         if(root==null){
             return;
         }
-        curr.val=a.removeFirst();
-
-        while(!a.isEmpty()){
-            curr.left=null;
-            curr.right=new TreeNode(a.removeFirst());
-            curr=curr.right;
+        s.push(root);
+    
+        while(!s.isEmpty()){
+            TreeNode curr=s.pop();
+            if(curr.right!=null){
+                s.push(curr.right);
+            }
+            if(curr.left!=null){
+                s.push(curr.left);
+            }
+            if(!s.isEmpty()){
+                curr.right=s.peek();
+                curr.left=null;
+            }
         }
-
     }
 }
