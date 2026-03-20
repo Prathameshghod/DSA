@@ -1,6 +1,6 @@
 /**
  * Definition for a binary tree node.
- * p.valublic class TreeNode {
+ * public class TreeNode {
  *     int val;
  *     TreeNode left;
  *     TreeNode right;
@@ -10,20 +10,18 @@
 
 class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        while(true){
-            if((root.val==p.val && (root.val<=q.val || root.val>=q.val)) || (root.val==q.val && (root.val<=p.val || root.val>=p.val))){
-                break;
-            }
-            else if(root.val>p.val && root.val>q.val){
-                root=root.left;
-            }
-            else if(root.val<p.val && root.val<q.val){
-                root=root.right;
-            }
-            else{
-                break;
+       
+       
+        while (root != null) {
+            if (p.val < root.val && q.val < root.val) {
+                root = root.left; 
+            } else if (p.val > root.val && q.val > root.val) {
+                root = root.right; 
+            } else {
+                return root; 
             }
         }
-        return root;
+        return null;
+    
     }
 }
