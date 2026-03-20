@@ -14,19 +14,23 @@
  * }
  */
 class Solution {
-    public void check(TreeNode root,List<Integer> a){
+    int c=0;
+    int a=-1;
+    public void check(TreeNode root,int k){
         if(root==null){
             return;
         }
-        
-        check(root.left,a);
-        a.add(root.val);
-        check(root.right,a);
+        check(root.left,k);
+        c++;
+        if(c==k){
+            a=root.val;
+            return;
+        }
+        check(root.right,k);
     }
     public int kthSmallest(TreeNode root, int k) {
-        List<Integer> a= new ArrayList<>();
-        check(root,a);
-        
-        return a.get(k-1);
+        check(root,k);
+
+        return a;
     }
 }
