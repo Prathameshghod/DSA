@@ -18,14 +18,15 @@ class Solution {
         if(root==null){
             return;
         }
-        a.add(root.val);
+        
         check(root.left,a);
+        a.add(root.val);
         check(root.right,a);
     }
     public int kthSmallest(TreeNode root, int k) {
         List<Integer> a= new ArrayList<>();
         check(root,a);
-        Collections.sort(a);
+        
         return a.get(k-1);
     }
 }
