@@ -24,19 +24,20 @@ class Solution {
         check(root.right,a);
     }
     public boolean findTarget(TreeNode root, int k) {
-        ArrayList<Integer> a= new ArrayList<>();
-        check(root,a);
-
-        int n=a.size();
-
-        Map<Integer,Integer> m= new HashMap<>();
-
-        for(int i=0;i<n;i++){
-            int c=k-a.get(i);
-            if(m.containsKey(c)){
+        ArrayList<Integer> ans= new ArrayList<>();
+        check(root,ans);
+        int li = 0;
+        int ri = ans.size() - 1;
+        while(li<ri){
+            int left = ans.get(li);
+            int right  = ans.get(ri);
+            if(left + right < k){
+                li++;
+            }else if(left + right > k){
+                ri--;
+            }else{
                 return true;
             }
-            m.put(a.get(i),i);
         }
         return false;
     }
