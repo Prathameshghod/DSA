@@ -3,7 +3,6 @@ class Solution {
         int n=grid.length;
         int m=grid[0].length;
 
-        int[][] vis = new int[n][m];
         int c=0;
         Queue<int[]> q= new LinkedList<>();
 
@@ -11,10 +10,6 @@ class Solution {
             for(int j=0;j<m;j++){
                 if(grid[i][j]==2){
                     q.add(new int[]{i,j,0});
-                    vis[i][j]=2;
-                }
-                else{
-                    vis[i][j]=0;
                 }
                 if(grid[i][j]==1){
                     c++;
@@ -38,9 +33,9 @@ class Solution {
             for(int i=0;i<4;i++){
                 int x=ro+row[i];
                 int y=co+col[i];
-                if(x>=0 && x<n && y>=0 && y<m && vis[x][y]==0 && grid[x][y]==1){
+                if(x>=0 && x<n && y>=0 && y<m && grid[x][y]==1){
                     q.add(new int[]{x,y,t+1});
-                    vis[x][y]=2;
+                    grid[x][y]=2;
                     cnt++;
                 }
             }
