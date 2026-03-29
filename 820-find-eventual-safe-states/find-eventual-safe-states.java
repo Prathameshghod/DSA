@@ -1,45 +1,50 @@
 class Solution {
-    public List<Integer> eventualSafeNodes(int[][] graph) {
-        int n = graph.length;
-
-        Set<Integer> s = new HashSet<>();
-        List<Integer> r = new ArrayList<>();
-
-        // Step 1: terminal nodes
-        for (int i = 0; i < n; i++) {
-            if (graph[i].length == 0) {
-                s.add(i);
-                r.add(i);
-            }
-        }
-
-        boolean changed = true;
-
-        // Step 2: repeat until no new nodes are added
-        while (changed) {
-            changed = false;
-
-            for (int i = 0; i < n; i++) {
-                if (s.contains(i)) continue;
-
-                boolean a = true;
-
-                for (int j : graph[i]) {
-                    if (!s.contains(j)) {
-                        a = false;
-                        break;
+    public boolean dfs(ArrayList<ArrayList<Integer>> a,int node,boolean[] vis,boolean[] path,boolean[] check){
+            vis[node]=true;
+            path[node]=true;
+           for(int i : a.get(node)){
+                if(!vis[i]){
+                    if(dfs(a,i,vis,path,check)){
+                        return true;
                     }
                 }
-
-                if (a) {
-                    s.add(i);
-                    r.add(i);
-                    changed = true; // 🔥 important
+                else if(path[i]){
+                    return true;
                 }
             }
+            path[node]=false;
+            check[node]=true;
+            return false;
         }
+    public List<Integer> eventualSafeNodes(int[][] graph) {
+        int V=graph.length;
+        boolean[] vis=new boolean[V];
+            boolean[] path= new boolean[V];
+            boolean[] check= new boolean[V];
+            List<Integer> r= new ArrayList<>();
+            ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
 
-        Collections.sort(r);
-        return r;
+            for(int i = 0; i < V; i++) {
+                adj.add(new ArrayList<>());
+            }
+            
+             for(int i = 0; i < V; i++) {
+            for(int nei : graph[i]) {
+                adj.get(i).add(nei);
+            }
+        }
+            for(int i=0;i<V;i++){
+                if(!vis[i]){
+                    dfs(adj,i,vis,path,check);
+                }
+            }
+            for(int i=0;i<V;i++){
+                if(check[i]){
+                    r.add(i);
+                }
+            }
+            return r;
     }
 }
+
+  
