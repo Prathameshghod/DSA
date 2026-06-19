@@ -6,10 +6,10 @@ class Solution {
         int maxl=0;
         int maxr=0;
         int c=0;
-        while(l<=r){
+        while(l<r){
             if(height[l]<=height[r]){
                 if(height[l]>=maxl){
-                    maxl=Math.max(maxl,height[l]);
+                    maxl=height[l];
                 }
                 else{
                     c+=(maxl-height[l]);
@@ -18,7 +18,7 @@ class Solution {
             }
             else{
                 if(height[r]>=maxr){
-                    maxr=Math.max(maxr,height[r]);
+                    maxr=height[r];
                 }
                 else{
                     c+=(maxr-height[r]);
