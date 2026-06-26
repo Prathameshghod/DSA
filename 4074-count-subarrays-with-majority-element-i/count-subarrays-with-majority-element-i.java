@@ -7,9 +7,9 @@ class Solution {
             int c=0;
             for(int j=i;j<n;j++){
         
-                    c+=nums[j]==target? 1:0;
+                    c+=nums[j]==target? 1:-1;
                 
-                if(c>(j-i+1)/2){
+                if(c>0){
                     r++;
                 }
             }
