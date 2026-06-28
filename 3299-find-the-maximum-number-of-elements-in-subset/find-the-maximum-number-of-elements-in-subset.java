@@ -6,37 +6,32 @@ class Solution {
             a.put(i,a.getOrDefault(i,0)+1);
         }
         int max=0;
-    
-        for(int i:nums){
-            int r=0;
-            long x=i;
-            if(x==1){
-                if(a.get(1)%2==0){
-                    max=Math.max(a.get(1)-1,max);
-                }
-                else{
-                    max=Math.max(max,a.get(1));
-                }
-                continue;
-            }
-            while(a.containsKey((int) x)){
-                if(a.get((int) x)==1){
-                    r++;
-                    break;
-                }
-                long b=x*x;
-                if(b <= Integer.MAX_VALUE && a.containsKey((int) b)){
-                    r+=2;
-                    x=b;
-                }
-                else{
-                    r++;
-                    break;
-                }
-            }
-            
-            max=Math.max(max,r);
-        }
-        return max;
+        int ones = a.getOrDefault(1, 0);
+max = (ones % 2 == 0) ? ones - 1 : ones;
+
+for (int i : nums) {
+
+    if (i == 1) continue;
+
+    int r = 0;
+    long x = i;
+
+    while (x <= Integer.MAX_VALUE &&
+           a.getOrDefault((int)x, 0) > 1) {
+
+        r += 2;
+        x *= x;
+    }
+
+    if (x <= Integer.MAX_VALUE &&
+        a.getOrDefault((int)x, 0) == 1) {
+        r++;
+    } else {
+        r--;
+    }
+
+    max = Math.max(max, r);
+}
+return max;
     }
 }
