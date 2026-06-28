@@ -25,7 +25,7 @@ class Solution {
                     break;
                 }
                 long b=x*x;
-                if(a.containsKey((int) b)){
+                if(b <= Integer.MAX_VALUE && a.containsKey((int) b)){
                     r+=2;
                     x=b;
                 }
