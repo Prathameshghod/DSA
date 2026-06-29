@@ -1,13 +1,25 @@
 class Solution {
     public int maximumElementAfterDecrementingAndRearranging(int[] arr) {
-        Arrays.sort(arr);
-        arr[0]=1;
-        int n=arr.length;
-        for(int i=1;i<n;i++){
-            if(Math.abs(arr[i]-arr[i-1])>1){
-                arr[i]=arr[i-1]+1;
-            }
+        int n = arr.length;
+        int[] a = new int[n + 1];
+
+        for (int x : arr) {
+            a[Math.min(x, n)]++;
         }
-        return arr[n-1];
+
+        int j = 1;
+        int r = 1;
+        int i = 1;
+
+        while (j <= n && i <= n) {
+            while (a[i] > 0 && j <= i && j <= n) {
+                a[i]--;
+                r = j;
+                j++;
+            }
+            i++;
+        }
+
+        return r;
     }
 }
