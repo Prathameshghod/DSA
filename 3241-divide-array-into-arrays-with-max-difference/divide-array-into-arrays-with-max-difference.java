@@ -16,10 +16,7 @@ class Solution {
             }
             j++;
         }
-        for(int i=0;i<n;i++){
-            System.out.print(nums[i]+" ");
-        }
-        System.out.println();
+        
         return a;
     }
 }
