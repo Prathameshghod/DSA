@@ -1,20 +1,16 @@
 class Solution {
     public int timeRequiredToBuy(int[] tickets, int k) {
-       
-        int n=tickets.length;
-        
-        int c=0;
-        while(tickets[k]>0){
-            for(int i=0;i<n;i++){
-                if(tickets[i]!=0){
-                    tickets[i]--;
-                    c++;
-                }
-                if(tickets[k]==0){
-                    return c;
-                }
+        int curr = tickets[k];
+        int ans=0;
+
+        for(int i=0; i<tickets.length; i++){
+            if(i<=k){
+                ans += Math.min(curr, tickets[i]);
+            }else{
+                ans += Math.min(curr-1, tickets[i]);
             }
         }
-        return c;
+
+        return ans;
     }
 }
