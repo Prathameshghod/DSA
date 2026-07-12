@@ -2,17 +2,17 @@ class Solution {
     public int[] arrayRankTransform(int[] arr) {
         int[] a=arr.clone();
         Arrays.sort(a);
-        int n=arr.length;
-        Map<Integer,Integer> m= new HashMap<>();
-        int r=1;
+        int n=a.length;
+        Map<Integer,Integer> b= new HashMap<>();
+        int c=1;
         for(int i=0;i<n;i++){
-            if(!m.containsKey(a[i])){
-                m.put(a[i],r);
-                r++;
+            if(b.get(a[i])==null){
+                b.put(a[i],c);
+                c++;
             }
         }
         for(int i=0;i<n;i++){
-            arr[i]=m.get(arr[i]);
+            arr[i]=b.get(arr[i]);
         }
         return arr;
     }
