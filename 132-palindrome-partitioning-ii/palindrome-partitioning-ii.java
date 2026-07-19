@@ -1,37 +1,51 @@
 class Solution {
+
+    public boolean ispal(String s,int i,int j){
+        while(i<j){
+            if(s.charAt(i)!=s.charAt(j)){
+                return false;
+            }
+            i++;
+            j--;
+        }
+        return true;
+    }
+
+    public int solve(String s,int i,int[] t){
+
+        if(i==s.length()){
+            return 0;
+        }
+        if (ispal(s, i, s.length() - 1)) {
+            return 0;
+        }
+        if(t[i]!=-1){
+            return t[i];
+        }
+
+        int min=Integer.MAX_VALUE;
+
+        for(int k=i;k<s.length();k++){
+            if(ispal(s,i,k)){
+                int nextCuts = solve(s, k + 1, t);
+                if (nextCuts != Integer.MAX_VALUE) {
+                    min = Math.min(min, 1 + nextCuts);
+                }
+            }
+        }
+
+        return t[i]=min;
+    }
+
     public int minCut(String s) {
+
         int n=s.length();
-        boolean[][] p=new boolean[n][n];
-        int[] t= new int[n];
 
-        for(int i=0;i<n;i++){
-            p[i][i]=true;
-        }
+        int[] t=new int[n+1];
 
-        for(int l=2;l<=n;l++){
-            for (int i = 0; i <= n - l; i++) {
-                int j = i + l - 1;
-                if(l==2){
-                    p[i][j]=(s.charAt(i)==s.charAt(j));
-                }
-                else{
-                    p[i][j]=(s.charAt(i)==s.charAt(j) && p[i+1][j-1]);
-                }
-            }
-        }
-        for(int i=0;i<n;i++){
-        if(p[0][i]){
-                t[i]=0;
-            }
-            else{
-                t[i]=Integer.MAX_VALUE;
-                for(int k=0;k<i;k++){
-                    if(p[k+1][i]==true && 1+t[k]<t[i]){
-                        t[i]=1+t[k];
-                    }
-                }
-            }
-        }
-        return t[n-1];
+            Arrays.fill(t,-1);
+        
+
+        return solve(s,0,t);
     }
 }
