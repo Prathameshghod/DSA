@@ -1,5 +1,20 @@
 class Solution {
-    public boolean canPartition(int[] nums) {
+    public boolean solve(int[] a,int i,int s,Boolean[][] t){
+        if(s==0){
+            return true;
+        }
+        if(i==a.length){
+            return false;
+        }
+        if(t[i][s]!=null){
+            return t[i][s];
+        }
+        if(a[i]<=s){
+            return t[i][s]=solve(a,i+1,s-a[i],t) || solve(a,i+1,s,t);
+        }
+        return t[i][s]=solve(a,i+1,s,t);
+    }
+    public Boolean canPartition(int[] nums) {
         int n=nums.length;
         int s=0;
         for(int i=0;i<n;i++){
@@ -9,25 +24,7 @@ class Solution {
             return false;
         }
         s=s/2;
-        boolean[][] t= new boolean[n+1][s+1];
-        for(int i=0;i<n+1;i++){
-            for(int j=0;j<s+1;j++){
-                if(j==0){
-                    t[i][j]=true;
-                }
-            }
-        }
-
-        for(int i=1;i<n+1;i++){
-            for(int j=1;j<s+1;j++){
-                if(nums[i-1]<=j){
-                    t[i][j]=t[i-1][j-nums[i-1]] || t[i-1][j];
-                }
-                else{
-                    t[i][j]=t[i-1][j];
-                }
-            }
-        }
-        return t[n][s];
+        Boolean[][] t= new Boolean[n+1][s+1];
+        return solve(nums,0,s,t);
     }
 }
