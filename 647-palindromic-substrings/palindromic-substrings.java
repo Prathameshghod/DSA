@@ -1,20 +1,18 @@
 class Solution {
+    public int c;
+    public void solve(String s,int i,int j){
+        while(i>=0 && j<s.length() && s.charAt(i)==s.charAt(j)){
+                c++;
+                i--;
+                j++;
+            
+        }
+    }
     public int countSubstrings(String s) {
         int n=s.length();
-        int c=0;
         for(int i=0;i<n;i++){
-            c+=count(s,i,i);
-            c+=count(s,i,i+1);
-        }
-        return c;
-    }
-    public int count(String s,int l,int r){
-        int n=s.length();
-        int c=0;
-        while((l>=0 && r<n) && s.charAt(l)==s.charAt(r)){
-            c++;
-            l--;
-            r++;
+            solve(s,i,i);
+            solve(s,i,i+1);
         }
         return c;
     }
