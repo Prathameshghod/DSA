@@ -19,7 +19,7 @@ public class Main
     public static int func(int n,int s,int[] a){
         int[][] t= new int[n+1][s+1];
         for(int j=1;j<s+1;j++){
-            t[0][j]=Integer.MAX_VALUE;
+            t[0][j]=Integer.MAX_VALUE-1;
         }
         for(int i=1;i<n+1;i++){
             for(int j=1;j<s+1;j++){
@@ -31,7 +31,7 @@ public class Main
                 }
             }
         }
-        return t[n][s]<0?-1:t[n][s];
+        return t[n][s]==Integer.MAX_VALUE-1?-1:t[n][s];
     }
 	public static void main(String[] args) {
 		Scanner sc=new Scanner(System.in);
