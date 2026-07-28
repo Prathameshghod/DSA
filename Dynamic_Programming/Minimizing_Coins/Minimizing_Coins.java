@@ -16,22 +16,29 @@ import java.util.*;
  
 public class Main
 {
-    public static int solve(int s,int n,int[] a){
+    public static int solve(int s,int n,int[] a,int[][] t){
         if(s==0){
             return 0;
         }
         if(n==0){
             return Integer.MAX_VALUE;
         }
+        if(t[n][s]!=-1){
+            return t[n][s];
+        }
         if(a[n-1]<=s){
-            return Math.min(1+solve(s-a[n-1],n,a),solve(s,n-1,a));
+            return Math.min(1+solve(s-a[n-1],n,a,t),solve(s,n-1,a,t));
         }
         else{
-            return solve(s,n-1,a);
+            return solve(s,n-1,a,t);
         }
     }
     public static int func(int n,int s,int[] a){
-        return solve(s,n,a);
+        int[][] t= new int[n+1][s+1];
+        for(int[] i:t){
+            Arrays.fill(i,-1);
+        }
+        return solve(s,n,a,t);
     }
 	public static void main(String[] args) {
 		Scanner sc=new Scanner(System.in);
