@@ -31,7 +31,7 @@ public class Main
                 }
             }
         }
-        return t[n][s];
+        return t[n][s]<0?-1:t[n][s];
     }
 	public static void main(String[] args) {
 		Scanner sc=new Scanner(System.in);
