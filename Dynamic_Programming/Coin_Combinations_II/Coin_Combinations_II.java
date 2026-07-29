@@ -16,6 +16,7 @@ import java.util.*;
  
 public class Main
 {
+    static final int m=1_000_000_007;
     public static int func(int n,int s,int[] a){
         int[][] t= new int[n+1][s+1];
         for(int i=0;i<n+1;i++){
@@ -24,10 +25,10 @@ public class Main
         for(int i=1;i<n+1;i++){
             for(int j=1;j<s+1;j++){
                 if(a[i-1]<=j){
-                    t[i][j]=t[i][j-a[i-1]]+t[i-1][j];
+                    t[i][j]=(t[i][j-a[i-1]]+t[i-1][j])%m;
                 }
                 else{
-                    t[i][j]=t[i-1][j];
+                    t[i][j]=(t[i-1][j])%m;
                 }
             }
         }
