@@ -5,11 +5,20 @@
  * Date: 2026-07-31
  */
 
-import java.util.*;
  
-public class Main {
+import java.util.*;
+public class Main{
+ 
+    static int distinctValuesMap(int[] arr) {
+        Map<Integer, Integer> freqMap = new HashMap<>();
+        for (int num : arr) {
+            freqMap.put(num, freqMap.getOrDefault(num, 0) + 1);
+        }
+        return freqMap.size();
+    }
+ 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+         Scanner sc = new Scanner(System.in);
  
         int n = sc.nextInt();
         int[] a = new int[n];
@@ -18,15 +27,6 @@ public class Main {
             a[i] = sc.nextInt();
         }
  
-        Arrays.sort(a);
- 
-        int cnt = 1;
-        for (int i = 1; i < n; i++) {
-            if (a[i] != a[i - 1]) {
-                cnt++;
-            }
-        }
- 
-        System.out.println(cnt);
+        System.out.println(distinctValuesMap(a));
     }
 }
