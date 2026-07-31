@@ -16,9 +16,9 @@ import java.util.*;
 public class Main
 {
     public static int func(int n,int[] a){
-        Set<Integer> b=new HashSet<>();
+        Set<Long> b=new HashSet<>();
         for(int i:a){
-            b.add(i);
+            b.add((long) i);
         }
         return b.size();
     }
