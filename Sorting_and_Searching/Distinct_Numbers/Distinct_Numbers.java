@@ -5,28 +5,23 @@
  * Date: 2026-07-31
  */
 
- 
+import java.io.*;
 import java.util.*;
-public class Main{
  
-    static int distinctValuesMap(int[] arr) {
-        Map<Integer, Integer> freqMap = new HashMap<>();
-        for (int num : arr) {
-            freqMap.put(num, freqMap.getOrDefault(num, 0) + 1);
-        }
-        return freqMap.size();
-    }
+public class Main {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
  
-    public static void main(String[] args) {
-         Scanner sc = new Scanner(System.in);
+        int n = Integer.parseInt(br.readLine());
  
-        int n = sc.nextInt();
-        int[] a = new int[n];
+        StringTokenizer st = new StringTokenizer(br.readLine());
+ 
+        HashSet<Integer> set = new HashSet<>();
  
         for (int i = 0; i < n; i++) {
-            a[i] = sc.nextInt();
+            set.add(Integer.parseInt(st.nextToken()));
         }
  
-        System.out.println(distinctValuesMap(a));
+        System.out.println(set.size());
     }
 }
