@@ -2,7 +2,7 @@
  * Problem Name: Removing_Digits
  * Language: Java
  * Category: Dynamic_Programming
- * Date: 2026-07-29
+ * Date: 2026-08-02
  */
 
 /******************************************************************************
