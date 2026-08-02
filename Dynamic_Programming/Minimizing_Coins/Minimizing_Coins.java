@@ -2,7 +2,7 @@
  * Problem Name: Minimizing_Coins
  * Language: Java
  * Category: Dynamic_Programming
- * Date: 2026-07-28
+ * Date: 2026-08-02
  */
 
 /******************************************************************************
