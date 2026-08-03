@@ -25,7 +25,7 @@ public class Main
         }
         if(a[idx]!=0){
             if(prev==0 || Math.abs(a[idx]-prev)<=1){
-                return t[idx][prev]=solve(idx+1,n,x,a,a[idx],t);
+                return t[idx][prev]=(solve(idx+1,n,x,a,a[idx],t))%MOD;
             }
             else{
                 return t[idx][prev]=0;
@@ -34,12 +34,14 @@ public class Main
         int b=0;
         if(idx==0 || prev==0){
             for(int i=1;i<=x;i++){
-                b+=solve(idx+1,n,x,a,i,t);
+                b=(b+solve(idx+1,n,x,a,i,t))%MOD;
             }
         }
         else{
             for(int i=prev-1;i<=prev+1;i++){
-                b+=solve(idx+1,n,x,a,i,t);
+                if(i>=1 && i<=x){
+                    b=(b+solve(idx+1,n,x,a,i,t))%MOD;
+                }
             }
         }
         return t[idx][prev]=b;
