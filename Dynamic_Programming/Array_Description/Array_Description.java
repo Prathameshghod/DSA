@@ -16,42 +16,34 @@ import java.util.*;
 public class Main
 {
     private static final int MOD = 1_000_000_007;
-    public static int solve(int idx,int n,int x,int[] a,int prev,int[][] t){
-        if(idx==n){
-            return 1;
-        }
-        if(t[idx][prev]!=-1){
-            return t[idx][prev];
-        }
-        if(a[idx]!=0){
-            if(prev==0 || Math.abs(a[idx]-prev)<=1){
-                return t[idx][prev]=(solve(idx+1,n,x,a,a[idx],t))%MOD;
-            }
-            else{
-                return t[idx][prev]=0;
-            }
-        }
-        int b=0;
-        if(idx==0 || prev==0){
-            for(int i=1;i<=x;i++){
-                b=(b+solve(idx+1,n,x,a,i,t))%MOD;
+    
+    public static int func(int n,int x,int[] a){
+        int[][] t= new int[n][x+1];
+        if(a[0]==0){
+            for(int j=1;j<=x;j++){
+                t[0][j]=1;     
             }
         }
         else{
-            for(int i=prev-1;i<=prev+1;i++){
-                if(i>=1 && i<=x){
-                    b=(b+solve(idx+1,n,x,a,i,t))%MOD;
+            t[0][a[0]]=1;
+        }
+        for(int i=1;i<n;i++){
+            for(int j=1;j<x+1;j++){
+                if(a[i]!=0 && a[i]!=j){
+                    continue;
+                }
+                for(int prev=j-1;prev<=j+1;prev++){
+                    if(prev>=1 && prev<=x){
+                        t[i][j]=(t[i][j] + t[i-1][prev])%MOD;
+                    }
                 }
             }
         }
-        return t[idx][prev]=b;
-    }
-    public static int func(int n,int x,int[] a){
-        int[][] t= new int[n+1][x+1];
-        for(int[] i:t){
-            Arrays.fill(i,-1);
+        int r=0;
+        for(int j=1;j<=x;j++){
+            r=(r+t[n-1][j])%MOD;
         }
-        return solve(0,n,x,a,0,t)%MOD;
+        return r;
     }
 	public static void main(String[] args) {
 	    Scanner sc= new Scanner(System.in);
