@@ -13,6 +13,7 @@ Write your code in this editor and press "Run" button to execute it.
  
 *******************************************************************************/
 import java.util.*;
+import java.io.*;
 public class Main
 {
     private static final int MOD = 1_000_000_007;
@@ -45,13 +46,19 @@ public class Main
         }
         return r;
     }
-	public static void main(String[] args) {
-	    Scanner sc= new Scanner(System.in);
-	    int n=sc.nextInt();
-	    int x=sc.nextInt();
+	public static void main(String[] args) throws Exception{
+	    BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+	    StringTokenizer st= new StringTokenizer(br.readLine());
+	  
+	    int n=Integer.parseInt(st.nextToken());
+	    int x=Integer.parseInt(st.nextToken());
+	    
 	    int[] a=new int[n];
+	    
+	    st = new StringTokenizer(br.readLine());
+	    
 	    for(int i=0;i<n;i++){
-	        a[i]=sc.nextInt();       
+	        a[i]=Integer.parseInt(st.nextToken());       
 	    }
 	   // int n=3;
 	   // int x=5;
