@@ -7,6 +7,7 @@ My accepted solutions to the [CSES Problem Set](https://cses.fi/problemset/), au
 
 | Problem | Category | Solutions |
 | :--- | :--- | :--- |
+| Counting Towers | Dynamic Programming | [ Java ](https://github.com/prathameshghod/DSA/blob/main/Dynamic_Programming/Counting_Towers/Counting_Towers.java) |
 | Array Description | Dynamic Programming | [ Java ](https://github.com/prathameshghod/DSA/blob/main/Dynamic_Programming/Array_Description/Array_Description.java) |
 | Book Shop | Dynamic Programming | [ Java ](https://github.com/prathameshghod/DSA/blob/main/Dynamic_Programming/Book_Shop/Book_Shop.java) |
 | Grid Paths I | Dynamic Programming | [ Java ](https://github.com/prathameshghod/DSA/blob/main/Dynamic_Programming/Grid_Paths_I/Grid_Paths_I.java) |
