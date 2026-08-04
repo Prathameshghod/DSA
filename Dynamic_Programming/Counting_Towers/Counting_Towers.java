@@ -16,40 +16,28 @@ import java.util.*;
 import java.io.*;
 public class Main
 {
-    public static final int MOD = 1000000007;
-    public static int solve(int n,int s){
-        if(n==1){
-            return 1;
-        }
-        if(s==0){
-            return (4*solve(n-1,0)+solve(n-1,1))%MOD;
-        }
-        else{
-            return (2*solve(n-1,1)+solve(n-1,0))%MOD;
-        }
-        
-    }
+    public static final int MOD = 1000_000_007;
+ 
     public static int func(int n){
-        return (solve(n,0)+solve(n,1))%MOD;
+        int[][] t= new int[n+1][2];
+        t[1][0]=1;
+        t[1][1]=1;
+        for(int i=2;i<n+1;i++){
+             t[i][0] = (int)(((long)4 * t[i - 1][0] + t[i - 1][1]) % MOD);
+            t[i][1] = (int)(((long)2 * t[i - 1][1] + t[i - 1][0]) % MOD);
+        }
+        return (int)((long) t[n][0]+(long) t[n][1])%MOD;
     }
-	public static void main(String[] args) throws Exception{
-	    BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
-	    
-	    String line= br.readLine();
-	    if(line==null || line.trim().isEmpty()){
-	        return;
-	    }
-	    int t=Integer.parseInt(line.trim());
-	    while(t-->0){
-	        line=br.readLine();
-	        while(line!=null && line.trim().isEmpty()){
-	            line=br.readLine();
-	        }
-	        if(line==null){
-	            break;
-	        }
-	        int n=Integer.parseInt(line.trim());
-	        System.out.println(func(n));
-	    }
-	}
+    
+    public static void main(String[] args) throws Exception {
+ 
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+ 
+        int tc = Integer.parseInt(br.readLine());
+ 
+        while (tc-- > 0) {
+            int n = Integer.parseInt(br.readLine());
+            System.out.println(func(n));
+        }
+    }
 }
