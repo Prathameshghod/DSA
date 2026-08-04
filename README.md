@@ -7,6 +7,7 @@ My accepted solutions to the [CSES Problem Set](https://cses.fi/problemset/), au
 
 | Problem | Category | Solutions |
 | :--- | :--- | :--- |
+| Minimal Grid Path | Dynamic Programming | [ Java ](https://github.com/prathameshghod/DSA/blob/main/Dynamic_Programming/Minimal_Grid_Path/Minimal_Grid_Path.java) |
 | Rectangle Cutting | Dynamic Programming | [ Java ](https://github.com/prathameshghod/DSA/blob/main/Dynamic_Programming/Rectangle_Cutting/Rectangle_Cutting.java) |
 | Longest Common Subsequence | Dynamic Programming | [ Java ](https://github.com/prathameshghod/DSA/blob/main/Dynamic_Programming/Longest_Common_Subsequence/Longest_Common_Subsequence.java) |
 | Edit Distance | Dynamic Programming | [ Java ](https://github.com/prathameshghod/DSA/blob/main/Dynamic_Programming/Edit_Distance/Edit_Distance.java) |
