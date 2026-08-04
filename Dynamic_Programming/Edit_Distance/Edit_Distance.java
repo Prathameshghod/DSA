@@ -16,35 +16,32 @@ import java.util.*;
 import java.io.*;
 public class Main
 {
-    public static int solve(String a,String b,int n,int m,int[][] t){
-        if(n==0){
-            return m;
-        }
-        if(m==0){
-            return n;
-        }
-        if(t[n][m]!=-1){
-            return t[n][m];
-        }
-        if(a.charAt(n-1)==b.charAt(m-1)){
-            return t[n][m]=solve(a,b,n-1,m-1,t);
-        }
-        else{
-            int insert=solve(a,b,n,m-1,t);
-            int delete=solve(a,b,n-1,m,t);
-            int replace=solve(a,b,n-1,m-1,t);
-            return t[n][m]=1+Math.min(insert,Math.min(delete,replace));
-        }
-    }
     public static int func(String a,String b){
         int n=a.length();
         int m=b.length();
         
         int[][] t= new int[n+1][m+1];
-        for(int[] i:t){
-            Arrays.fill(i,-1);
+        for (int i = 0; i <= n; i++) {
+            t[i][0] = i;
         }
-        return solve(a,b,a.length(),b.length(),t);
+ 
+        for (int j = 0; j <= m; j++) {
+            t[0][j] = j;
+        }
+        for(int i=1;i<n+1;i++){
+            for(int j=1;j<m+1;j++){
+                if(a.charAt(i-1)==b.charAt(j-1)){
+                    t[i][j]=t[i-1][j-1];
+                }
+                else{
+                    int insert=t[i][j-1];
+                    int delete=t[i-1][j];
+                    int replace=t[i-1][j-1];
+                    t[i][j]=1+Math.min(insert,Math.min(delete,replace));
+                }
+            }
+        }
+        return t[n][m];
     }
 	public static void main(String[] args) throws Exception{
 		BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
