@@ -15,29 +15,21 @@ Write your code in this editor and press "Run" button to execute it.
 import java.util.*;
 public class Main
 {
-    public static int func(char[][] a){
-        int n=a.length;
-        int MOD = 1_000_000_007;
-        if (a[0][0] == '*' || a[n - 1][n - 1] == '*') {
+    public static int solve(char[][] a,int i,int j){
+        if(i==1 && j==1){
+            return 1;
+        }
+        if(i<=0 || j<=0){
             return 0;
         }
-        int[][] dp= new int[n][n];
-        dp[0][0]=1;
-        for(int i=0;i<n;i++){
-            for(int j=0;j<n;j++){
-                if(a[i][j]=='*'){
-                    dp[i][j]=0;
-                    continue;
-                }
-                if(i>0){
-                    dp[i][j]=(dp[i][j]+dp[i-1][j])%MOD;
-                }
-                if(j>0){
-                    dp[i][j]=(dp[i][j]+dp[i][j-1])%MOD;
-                }
-            }
+        if(a[i-1][j-1]=='*'){
+            return 0;
         }
-        return dp[n-1][n-1];
+        return solve(a,i-1,j)+solve(a,i,j-1);
+    }
+    public static int func(char[][] a){
+        int n=a.length;
+        return solve(a,n,n);
     }
 	public static void main(String[] args) {
         Scanner sc= new Scanner(System.in);
@@ -47,7 +39,6 @@ public class Main
         for (int i = 0; i < n; i++) {
             a[i] = sc.next().toCharArray();
         }
-        
 		System.out.println(func(a));
 	}
 }
