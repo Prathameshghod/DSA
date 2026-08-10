@@ -1,25 +1,19 @@
 class Solution {
-    public int solve(int i,int buy,int[] a,int[][] t){
-        int n=a.length;
-        if(i==n){
-            return 0;
-        }
-        if(t[i][buy]!=-1){
-            return t[i][buy];
-        }
-        if(buy==1){
-            return t[i][buy]=Math.max(solve(i+1,buy-1,a,t)-a[i],solve(i+1,buy,a,t));
-        }
-        else{
-            return t[i][buy]=Math.max(solve(i+1,buy+1,a,t)+a[i],solve(i+1,buy,a,t));
-        }
-
-    }
     public int maxProfit(int[] prices) {
-        int[][] t=new int[prices.length+1][2];
-        for(int[] i:t){
-            Arrays.fill(i,-1);
+        int n=prices.length;
+        int[][] t=new int[n+1][2];
+        t[n][0]=0;
+        t[n][1]=0;
+        for(int i=n-1;i>=0;i--){
+            for(int j=1;j>=0;j--){
+                if(j==1){
+                    t[i][j]=Math.max(t[i+1][j-1]-prices[i],t[i+1][j]);
+                }
+                else{
+                    t[i][j]=Math.max(t[i+1][j+1]+prices[i],t[i+1][j]);
+                }
+            }
         }
-        return solve(0,1,prices,t);
+        return t[0][1];
     }
 }
