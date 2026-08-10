@@ -1,47 +1,53 @@
-class Solution {        
-    public List<Integer> largestDivisibleSubset(int[] nums) {
-        int n = nums.length;
-        Arrays.sort(nums);
-        int[] t = new int[n];
-        int[] hash = new int[n];
+class Solution {
+    public List<Integer> largestDivisibleSubset(int[] arr) {
+        Arrays.sort(arr);
+        int n = arr.length;
 
-        Arrays.fill(t, 1);
+        int[] dp = new int[n];
+        int[] parent = new int[n];
 
-        int maxi = 1;
-        int last = 0;
-
-        List<Integer> a = new ArrayList<>();
+        Arrays.fill(dp, 1);
 
         for (int i = 0; i < n; i++) {
+            parent[i] = i;
+        }
 
-            hash[i] = i;
+        int maxLen = 1;
+        int lastIndex = 0;
 
-            for (int j = 0; j < i; j++) {
+        // DP
+        for (int i = 0; i < n; i++) {
 
-                if (((nums[i] % nums[j])==0 || (nums[j] % nums[i])==0) && t[i] < t[j] + 1) {
+            for (int prev = 0; prev < i; prev++) {
 
-                    t[i] = t[j] + 1;
-                    hash[i] = j;
+                if (arr[i] % arr[prev]==0 &&
+                    dp[i] < 1 + dp[prev]) {
+
+                    dp[i] = 1 + dp[prev];
+
+                    // Store previous element's index
+                    parent[i] = prev;
                 }
             }
 
-            if (t[i] > maxi) {
-                maxi = t[i];
-                last = i;
+            if (dp[i] > maxLen) {
+                maxLen = dp[i];
+                lastIndex = i;
             }
         }
 
-        int curr = last;
+        // Construct LIS
+        ArrayList<Integer> ans = new ArrayList<>();
 
-        while (hash[curr] != curr) {
-            a.add(nums[curr]);
-            curr = hash[curr];
+        while (parent[lastIndex] != lastIndex) {
+            ans.add(arr[lastIndex]);
+            lastIndex = parent[lastIndex];
         }
 
-        a.add(nums[curr]);
+        ans.add(arr[lastIndex]);
 
-        Collections.reverse(a);
+        Collections.reverse(ans);
 
-        return a;
+        return ans;        
     }
 }
