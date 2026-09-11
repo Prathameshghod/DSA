@@ -1,29 +1,29 @@
 class Solution {
-    public void solve(int[] d,int c,int b,boolean[] vis,Set<Integer> a){
-        if(c==3){
-            if(b%2==0){
-                a.add(b);
-            }
-            return;
-        }
-        for(int i=0;i<d.length;i++){
-            if(vis[i]==true){
-                continue;
-            }
-            if(c==0 && d[i]==0){
-                continue;
-            }
-            vis[i]=true;
-            solve(d,c+1,b*10+d[i],vis,a);
-            vis[i]=false;
-        }
-    }
     public int totalNumbers(int[] digits) {
         int n=digits.length;
-        boolean[] vis=new boolean[n];
-        Set<Integer> a= new HashSet<>();
+        boolean[] vis=new boolean[1000];
+        int c=0;
 
-         solve(digits,0,0,vis,a);
-         return a.size();
+        for(int i=0;i<n;i++){
+            if(digits[i]==0){
+                continue;
+            }
+            for(int j=0;j<n;j++){
+                if(i==j){
+                    continue;
+                }
+                    for(int k=0;k<n;k++){
+                        if(k==i || k==j || digits[k]%2!=0){
+                            continue;
+                        }
+                        int x=digits[i]*100+digits[j]*10+digits[k];
+                        if(!vis[x]){
+                            vis[x]=true;
+                            c++;
+                        }
+                    }
+            }
+        }
+        return c; 
     }
 }
